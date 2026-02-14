@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "457eed17-3f06-491a-b0bb-629388e325d5": {
+      "ProjectGuid": "457eed17-3f06-491a-b0bb-629388e325d5",
+      "DisplayName": "CarDealerShipBackend.Infrastructure",
+      "ColorIndex": 0
+    },
+    "b9c1fced-2849-445e-a010-e0fd8316d678": {
+      "ProjectGuid": "b9c1fced-2849-445e-a010-e0fd8316d678",
+      "DisplayName": "CarDealerShipBackend.Api",
+      "ColorIndex": 1
+    },
+    "b4b9dac2-0660-4fc8-8e38-a642e0b5033b": {
+      "ProjectGuid": "b4b9dac2-0660-4fc8-8e38-a642e0b5033b",
+      "DisplayName": "CarDealerShipBackend.Application",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}

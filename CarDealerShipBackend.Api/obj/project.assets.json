@@ -1,0 +1,125 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0": {
+      "CarDealerShipBackend.Application/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "CarDealerShipBackend.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CarDealerShipBackend.Application.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CarDealerShipBackend.Application.dll": {}
+        }
+      },
+      "CarDealerShipBackend.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/CarDealerShipBackend.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CarDealerShipBackend.Domain.dll": {}
+        }
+      },
+      "CarDealerShipBackend.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "CarDealerShipBackend.Application": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/CarDealerShipBackend.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CarDealerShipBackend.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CarDealerShipBackend.Application/1.0.0": {
+      "type": "project",
+      "path": "../CarDealerShipBackend.Application/CarDealerShipBackend.Application.csproj",
+      "msbuildProject": "../CarDealerShipBackend.Application/CarDealerShipBackend.Application.csproj"
+    },
+    "CarDealerShipBackend.Domain/1.0.0": {
+      "type": "project",
+      "path": "../CarDealerShipBackend.Domain/CarDealerShipBackend.Domain.csproj",
+      "msbuildProject": "../CarDealerShipBackend.Domain/CarDealerShipBackend.Domain.csproj"
+    },
+    "CarDealerShipBackend.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../CarDealerShipBackend.Infrastructure/CarDealerShipBackend.Infrastructure.csproj",
+      "msbuildProject": "../CarDealerShipBackend.Infrastructure/CarDealerShipBackend.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0": [
+      "CarDealerShipBackend.Application >= 1.0.0",
+      "CarDealerShipBackend.Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\H\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\development\\dotnet-projects\\CarDealerShipBackend\\CarDealerShipBackend.Api\\CarDealerShipBackend.Api.csproj",
+      "projectName": "CarDealerShipBackend.Api",
+      "projectPath": "D:\\development\\dotnet-projects\\CarDealerShipBackend\\CarDealerShipBackend.Api\\CarDealerShipBackend.Api.csproj",
+      "packagesPath": "C:\\Users\\H\\.nuget\\packages\\",
+      "outputPath": "D:\\development\\dotnet-projects\\CarDealerShipBackend\\CarDealerShipBackend.Api\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\H\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "projectReferences": {
+            "D:\\development\\dotnet-projects\\CarDealerShipBackend\\CarDealerShipBackend.Application\\CarDealerShipBackend.Application.csproj": {
+              "projectPath": "D:\\development\\dotnet-projects\\CarDealerShipBackend\\CarDealerShipBackend.Application\\CarDealerShipBackend.Application.csproj"
+            },
+            "D:\\development\\dotnet-projects\\CarDealerShipBackend\\CarDealerShipBackend.Infrastructure\\CarDealerShipBackend.Infrastructure.csproj": {
+              "projectPath": "D:\\development\\dotnet-projects\\CarDealerShipBackend\\CarDealerShipBackend.Infrastructure\\CarDealerShipBackend.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net9.0": {
+        "targetAlias": "net9.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

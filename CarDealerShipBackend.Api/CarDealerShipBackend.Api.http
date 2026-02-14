@@ -1,0 +1,6 @@
+@CarDealerShipBackend.Api_HostAddress = http://localhost:5239
+
+GET {{CarDealerShipBackend.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
