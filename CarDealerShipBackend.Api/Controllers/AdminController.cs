@@ -12,11 +12,17 @@ namespace CarDealerShipBackend.Api.Controllers
     public class AdminController : ControllerBase
     {
         private readonly ICarService _carServices;
-        public readonly ISalesContractServices _salesContractServices;
-        public AdminController(ICarService carServices, ISalesContractServices salesContractServices)
+        private readonly ISalesContractServices _salesContractServices;
+        private readonly IInstallmentPaymentService _installmentPaymentService;
+        public AdminController(
+            ICarService carServices,
+            ISalesContractServices salesContractServices,
+            IInstallmentPaymentService installmentPaymentService
+            )
         {
             _carServices = carServices;
             _salesContractServices = salesContractServices;
+            _installmentPaymentService = installmentPaymentService;
         }
         [HttpGet("getAllCars")]
         [Authorize(Roles = Roles.Admin)]
@@ -54,6 +60,11 @@ namespace CarDealerShipBackend.Api.Controllers
         public async Task<IActionResult> addNewCar([FromBody] Car newCar) {
             _carServices.AddNewCar(newCar);
             return Ok();
+        }
+        [HttpGet("ContractPayment/{id}")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<IActionResult> getContractPayment(int id) {
+            return Ok( _installmentPaymentService.GetUserInstallmentPayments(id));
         }
     }
 }
