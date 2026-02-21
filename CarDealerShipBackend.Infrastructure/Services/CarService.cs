@@ -1,5 +1,4 @@
-<<<<<<< feature/car_service
-﻿using CarDealerShipBackend.Application.Interfaces;
+using CarDealerShipBackend.Application.Interfaces;
 using CarDealerShipBackend.Domain.Entities;
 using CarDealerShipBackend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -31,10 +30,13 @@ namespace CarDealerShipBackend.Infrastructure.Services
                 .ToListAsync();
         }
 
-        public async Task<Car> AddCarBannerAsync(Car car)
+        public async Task<IEnumerable<Car>> GetAdBannerAsync()
         {
-            _context.Cars.Add(car);
-            await _context.SaveChangesAsync();
-            return car;
+            return await _context.Cars
+                .Where(c => c.IsSold == "N")
+                .OrderByDescending(c => c.CarId) // Or use a CreatedDate property
+                .Take(5)
+                .ToListAsync();
         }
+    }
 }
