@@ -6,6 +6,6 @@ namespace CarDealerShipBackend.Application.Interfaces
     {
         Task<IEnumerable<Car>> GetAllCarsAsync();
         Task<IEnumerable<Car>> GetFiveLatestCarsAsync();
-        Task<Car> AddCarBannerAsync(Car car);
+        Task<IEnumerable<Car>> GetAdBannerAsync();
     }
 }
