@@ -1,39 +1,52 @@
-using CarDealerShipBackend.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using CarDealerShipBackend.Domain.Entities;
-using System.Text;
+using CarDealerShipBackend.Domain.Constants;
+using CarDealerShipBackend.Infrastructure; // Import your new class
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
+// --- CLEAN ARCHITECTURE INJECTION ---
+// This single line sets up DB, Identity, JWT, and Auth Services
 builder.Services.AddInfrastructure(builder.Configuration);
+// ------------------------------------
 
-
-builder.Services.AddAuthentication(options =>
+// Add Authorization Policies
+builder.Services.AddAuthorization(options =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
-    };
+    options.AddPolicy(Permissions.CanManageUsers, policy => policy.RequireClaim("Permission", Permissions.CanManageUsers));
+    options.AddPolicy(Permissions.CanViewDashboard, policy => policy.RequireClaim("Permission", Permissions.CanViewDashboard));
+    options.AddPolicy(Permissions.CanEditProfile, policy => policy.RequireClaim("Permission", Permissions.CanEditProfile));
 });
 
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+// Swagger Config
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -45,10 +58,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-
+// Enable Auth Middleware
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 app.MapControllers();
 
