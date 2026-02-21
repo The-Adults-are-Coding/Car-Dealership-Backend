@@ -6,7 +6,7 @@ namespace CarDealerShipBackend.Application.DTOs
       string Id,
       string Email,
       string Token
-      // List<string> Roles,
-      // List<string> Permissions
+  // List<string> Roles,
+  // List<string> Permissions
   );
 }
