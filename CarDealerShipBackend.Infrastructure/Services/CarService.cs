@@ -69,5 +69,20 @@ namespace CarDealerShipBackend.Infrastructure.Services
                 ))
                 .ToListAsync();
         }
+        public async Task<IEnumerable<CustomerCarResponse>> GetCarsByCustomerIdAsync(string userId)
+        {
+            return await _context.SalesContracts
+                .Where(sc => sc.Customer.Id == userId) 
+                .Select(sc => new CustomerCarResponse(
+                    sc.Car.CarId,
+                    sc.Car.Manufacturer,
+                    sc.Car.ModelName,
+                    sc.Car.CarYear,
+                    sc.Car.Price,
+                    sc.ContractNumber,
+                    sc.SaleDate
+                ))
+                .ToListAsync();
+        }
     }
 }
