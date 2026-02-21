@@ -1,6 +1,10 @@
+<<<<<<< feature/endpoints
 ﻿using CarDealerShipBackend.Application.Interfaces;
 using CarDealerShipBackend.Domain.Entities;
 using System;
+=======
+﻿using System;
+>>>>>>> dev
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace CarDealerShipBackend.Infrastructure.Services
 {
+<<<<<<< feature/endpoints
     public class CarService : ICarServices
     {
         public CarService() { }
@@ -25,5 +30,9 @@ namespace CarDealerShipBackend.Infrastructure.Services
         {
             throw new NotImplementedException();
         }
+=======
+    internal class CarService
+    {
+>>>>>>> dev
     }
 }
