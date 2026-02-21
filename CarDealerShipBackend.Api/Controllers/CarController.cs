@@ -18,7 +18,7 @@ namespace CarDealerShipBackend.Api.Controllers
             _carService=carServices;
         }
        [HttpGet("getAllCars")]
-       [Authorize(Roles=Roles.Admin)]
+       [Authorize]
        public async Task<IActionResult> GetAllCars()
        {
            return Ok(await _carService.GetAllCars());

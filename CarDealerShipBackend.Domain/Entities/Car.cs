@@ -35,5 +35,6 @@ namespace CarDealerShipBackend.Domain.Entities
 
         public DateTime? SoldDate { get; set; }
         public long? Mileage { get; set; }
+        public String ImageURl { get; set; } = String.Empty;
     }
 }
