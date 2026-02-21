@@ -1,3 +1,4 @@
+<<<<<<< feature/car_service
 ﻿using CarDealerShipBackend.Application.Interfaces;
 using CarDealerShipBackend.Domain.Entities;
 using CarDealerShipBackend.Infrastructure.Data;
@@ -36,5 +37,4 @@ namespace CarDealerShipBackend.Infrastructure.Services
             await _context.SaveChangesAsync();
             return car;
         }
-    }
 }
