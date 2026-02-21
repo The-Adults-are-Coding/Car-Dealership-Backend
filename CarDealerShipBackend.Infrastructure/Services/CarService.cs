@@ -84,5 +84,10 @@ namespace CarDealerShipBackend.Infrastructure.Services
                 ))
                 .ToListAsync();
         }
+        public void AddNewCar(Car car) 
+        {
+            _context.Cars.Add(car);
+            _context.SaveChanges();
+        }
     }
 }
