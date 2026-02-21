@@ -1,38 +1,40 @@
-<<<<<<< feature/endpoints
+<<<<<<< feature/car_service
 ﻿using CarDealerShipBackend.Application.Interfaces;
 using CarDealerShipBackend.Domain.Entities;
-using System;
-=======
-﻿using System;
->>>>>>> dev
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CarDealerShipBackend.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarDealerShipBackend.Infrastructure.Services
 {
-<<<<<<< feature/endpoints
-    public class CarService : ICarServices
+    public class CarService : ICarService
     {
-        public CarService() { }
-        public Task<IEnumerable<Car>> GetAdBanner()
+        private readonly ApplicationDbContext _context;
+
+        public CarService(ApplicationDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<IEnumerable<Car>> GetAllCars()
+        public async Task<IEnumerable<Car>> GetAllCarsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Cars
+                .Where(c => c.IsSold == "N")
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<Car>> GetFiveCars()
+        public async Task<IEnumerable<Car>> GetFiveLatestCarsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Cars
+                .Where(c => c.IsSold == "N")
+                .OrderByDescending(c => c.CarId) // Or use a CreatedDate property
+                .Take(5)
+                .ToListAsync();
         }
-=======
-    internal class CarService
-    {
->>>>>>> dev
-    }
+
+        public async Task<Car> AddCarBannerAsync(Car car)
+        {
+            _context.Cars.Add(car);
+            await _context.SaveChangesAsync();
+            return car;
+        }
 }
