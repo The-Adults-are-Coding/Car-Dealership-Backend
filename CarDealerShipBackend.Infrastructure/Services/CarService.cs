@@ -1,12 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarDealerShipBackend.Application.Interfaces;
+using CarDealerShipBackend.Domain.Entities;
+using CarDealerShipBackend.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarDealerShipBackend.Infrastructure.Services
 {
-    internal class CarService
+    public class CarService : ICarService
     {
+        private readonly ApplicationDbContext _context;
+
+        public CarService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<IEnumerable<Car>> GetAllCarsAsync()
+        {
+            return await _context.Cars
+                .Where(c => c.IsSold == "N")
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Car>> GetFiveLatestCarsAsync()
+        {
+            return await _context.Cars
+                .Where(c => c.IsSold == "N")
+                .OrderByDescending(c => c.CarId) // Or use a CreatedDate property
+                .Take(5)
+                .ToListAsync();
+        }
+
+        public async Task<Car> AddCarBannerAsync(Car car)
+        {
+            _context.Cars.Add(car);
+            await _context.SaveChangesAsync();
+            return car;
+        }
     }
 }
