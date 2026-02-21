@@ -9,6 +9,8 @@ namespace CarDealerShipBackend.Domain.Entities
         [Key]
         public int CarId { get; set; }
 
+
+
         [Required]
         [StringLength(50)]
         public string Manufacturer { get; set; }
