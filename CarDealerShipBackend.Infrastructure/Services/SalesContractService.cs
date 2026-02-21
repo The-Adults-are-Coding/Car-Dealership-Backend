@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarDealerShipBackend.Infrastructure.Services
 {
-    internal class SalesContractService : ISalesContractServices
+    public class SalesContractService : ISalesContractServices
     {
         private readonly ApplicationDbContext _context;
         public SalesContractService(ApplicationDbContext context) {
