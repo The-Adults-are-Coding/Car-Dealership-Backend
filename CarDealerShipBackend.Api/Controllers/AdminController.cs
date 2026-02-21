@@ -49,5 +49,11 @@ namespace CarDealerShipBackend.Api.Controllers
             _salesContractServices.AddNewSalesContract(contract);
             return Ok();
         }
+        [HttpPost("addNewCar")]
+        [Authorize(Roles = Roles.Admin)]
+        public async Task<IActionResult> addNewCar([FromBody] Car newCar) {
+            _carServices.AddNewCar(newCar);
+            return Ok();
+        }
     }
 }
