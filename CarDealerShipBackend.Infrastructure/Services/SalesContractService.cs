@@ -1,5 +1,6 @@
 ﻿using CarDealerShipBackend.Application.Interfaces;
 using CarDealerShipBackend.Domain.Entities;
+using CarDealerShipBackend.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,19 +11,29 @@ namespace CarDealerShipBackend.Infrastructure.Services
 {
     internal class SalesContractService : ISalesContractServices
     {
-        public Task<IEnumerable<SalesContract>> GetAllSalesContracts()
+        private readonly ApplicationDbContext _context;
+        public SalesContractService(ApplicationDbContext context) {
+            _context = context;
+        }
+        public void AddNewSalesContract(SalesContract salesContract)
         {
-            throw new NotImplementedException();
+            _context.SalesContracts.Add(salesContract);
+            _context.SaveChanges();
         }
 
-        public Task<SalesContract> GetCarSalesContracts(int CarId)
+        public async Task<IEnumerable<SalesContract>> GetAllSalesContracts()
         {
-            throw new NotImplementedException();
+            return _context.SalesContracts.ToList();
         }
 
-        public Task<IEnumerable<SalesContract>> GetUserSalesContracts(int UserId)
+        public async Task<SalesContract> GetCarSalesContracts(int CarId)
         {
-            throw new NotImplementedException();
+            return _context.SalesContracts.Where(s => s.CarId == CarId).First();
+        }
+
+        public async Task<IEnumerable<SalesContract>> GetUserSalesContracts(int UserId)
+        {
+            return _context.SalesContracts.Where(s => s.CustomerId == UserId).ToList();
         }
     }
 }
