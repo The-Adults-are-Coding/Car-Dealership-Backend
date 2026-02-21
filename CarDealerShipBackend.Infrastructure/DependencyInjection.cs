@@ -54,6 +54,7 @@ namespace CarDealerShipBackend.Infrastructure
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISalesContractServices, SalesContractService>();
             services.AddScoped<ICarService, CarService>();
+            services.AddScoped<ISalesService, SalesService>();
             return services;
         }
     }

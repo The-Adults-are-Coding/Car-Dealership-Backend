@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarDealerShipBackend.Application.DTOs
 {
-    internal class InstallmentResponse
-    {
-    }
+    public record InstallmentResponse(
+        decimal InstallmentId,
+        decimal Amount,
+        DateTime DueDate,
+        string Status
+    );
 }
