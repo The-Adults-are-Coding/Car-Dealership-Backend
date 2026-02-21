@@ -11,9 +11,9 @@ namespace CarDealerShipBackend.Api.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly ICarServices _carServices;
+        private readonly ICarService _carServices;
         public readonly ISalesContractServices _salesContractServices;
-        public AdminController(ICarServices carServices, ISalesContractServices salesContractServices)
+        public AdminController(ICarService carServices, ISalesContractServices salesContractServices)
         {
             _carServices = carServices;
             _salesContractServices = salesContractServices;
@@ -22,26 +22,29 @@ namespace CarDealerShipBackend.Api.Controllers
         [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> getAllCars()
         {
-            return Ok(value: await _carServices.GetAllCars());
+            return Ok(value: await _carServices.GetAllCarsAsync());
         }
         [HttpGet("getAllSalesContracts")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> getAllSalesContracts() {
+        public async Task<IActionResult> getAllSalesContracts()
+        {
             return Ok(await _salesContractServices.GetAllSalesContracts());
         }
         [HttpGet("getUserContracts/{id}")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> getUserSalesContracts(int id) {
+        public async Task<IActionResult> getUserSalesContracts(int id)
+        {
             return Ok(await _salesContractServices.GetUserSalesContracts(id));
         }
         [HttpGet("getCarContract/{id}")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> getCarSalesContract(int id) {
+        public async Task<IActionResult> getCarSalesContract(int id)
+        {
             return Ok(await _salesContractServices.GetCarSalesContracts(id));
         }
         [HttpPost("addNewContract")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> addNewSalesContract([FromBody] SalesContract contract) 
+        public async Task<IActionResult> addNewSalesContract([FromBody] SalesContract contract)
         {
             _salesContractServices.AddNewSalesContract(contract);
             return Ok();
