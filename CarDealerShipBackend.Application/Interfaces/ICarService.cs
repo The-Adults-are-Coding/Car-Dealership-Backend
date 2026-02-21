@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarDealerShipBackend.Domain.Entities;
 
 namespace CarDealerShipBackend.Application.Interfaces
 {
-    internal class ICarService
+    public interface ICarService
     {
+        Task<IEnumerable<Car>> GetAllCarsAsync();
+        Task<IEnumerable<Car>> GetFiveLatestCarsAsync();
+        Task<Car> AddCarBannerAsync(Car car);
     }
 }
