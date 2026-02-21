@@ -12,6 +12,7 @@ namespace CarDealerShipBackend.Application.Interfaces
         Task<IEnumerable<SalesContract>> GetAllSalesContracts();
         Task<IEnumerable<SalesContract>> GetUserSalesContracts(int UserId);
         Task<SalesContract> GetCarSalesContracts(int CarId);
+        void AddNewSalesContract(SalesContract salesContract);
 
     }
 }
