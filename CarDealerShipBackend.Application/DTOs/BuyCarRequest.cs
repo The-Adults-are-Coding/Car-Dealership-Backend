@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarDealerShipBackend.Application.DTOs
 {
-    internal class PurchaseRequest
+    public class BuyCarRequest
     {
+        public required decimal CarId { get; set; }
+        public required string PaymentType { get; set; } // "Cash" or "Installments"
+        public required decimal FinalPrice { get; set; }
+        public int? NumberOfInstallments { get; set; }
     }
 }
