@@ -53,6 +53,7 @@ namespace CarDealerShipBackend.Infrastructure
             // 4. Dependency Injection for Services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISalesContractServices, SalesContractService>();
+            services.AddScoped<ICarService, CarService>();
             return services;
         }
     }

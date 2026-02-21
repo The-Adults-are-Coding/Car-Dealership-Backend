@@ -4,6 +4,7 @@ using CarDealerShipBackend.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarDealerShipBackend.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260221102642_UpdatedRelationalSchema")]
+    partial class UpdatedRelationalSchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,10 +32,6 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -58,10 +57,6 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<string>("National_ID")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -90,10 +85,6 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
 
-                    b.Property<string>("occupation")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -108,11 +99,8 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
 
             modelBuilder.Entity("CarDealerShipBackend.Domain.Entities.Car", b =>
                 {
-                    b.Property<int>("CarId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("CarId"));
+                    b.Property<decimal>("CarId")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<string>("CarCondition")
                         .IsRequired()
@@ -126,10 +114,6 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
-
-                    b.Property<string>("ImageURl")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("IsSold")
                         .IsRequired()
@@ -226,9 +210,6 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
                     b.Property<decimal>("CarId")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("CarId1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("CompletionDate")
                         .HasColumnType("datetime(6)");
 
@@ -288,7 +269,7 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
 
                     b.HasKey("ContractId");
 
-                    b.HasIndex("CarId1");
+                    b.HasIndex("CarId");
 
                     b.HasIndex("ContractNumber")
                         .IsUnique();
@@ -441,7 +422,7 @@ namespace CarDealerShipBackend.Infrastructure.Migrations
                 {
                     b.HasOne("CarDealerShipBackend.Domain.Entities.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId1")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
