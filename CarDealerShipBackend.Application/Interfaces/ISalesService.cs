@@ -1,12 +1,12 @@
-﻿using System;
+﻿using CarDealerShipBackend.Application.DTOs;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CarDealerShipBackend.Application.Interfaces
 {
-    internal class ISalesService
+    public interface ISalesService
     {
+        Task<bool> ProcessPurchaseAsync(string userId, BuyCarRequest request);
+        Task<IEnumerable<InstallmentResponse>> GetUserInstallmentsAsync(string userId);
     }
 }
