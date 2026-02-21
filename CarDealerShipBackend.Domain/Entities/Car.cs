@@ -7,7 +7,7 @@ namespace CarDealerShipBackend.Domain.Entities
     public class Car
     {
         [Key]
-        public decimal CarId { get; set; }
+        public int CarId { get; set; }
 
         [Required]
         [StringLength(50)]
