@@ -1,3 +1,4 @@
+using CarDealerShipBackend.Application.DTOs;
 using CarDealerShipBackend.Application.Interfaces;
 using CarDealerShipBackend.Domain.Entities;
 using CarDealerShipBackend.Infrastructure.Data;
@@ -14,28 +15,58 @@ namespace CarDealerShipBackend.Infrastructure.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Car>> GetAllCarsAsync()
+        public async Task<IEnumerable<CarResponse>> GetAllCarsAsync()
         {
             return await _context.Cars
                 .Where(c => c.IsSold == "N")
+                .Select(c => new CarResponse(
+                    c.CarId,
+                    c.Manufacturer,
+                    c.ModelName,
+                    c.CarYear,
+                    c.Color,
+                    c.CarCondition,
+                    c.Price,
+                    c.Mileage
+                ))
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Car>> GetFiveLatestCarsAsync()
+        public async Task<IEnumerable<CarResponse>> GetFiveLatestCarsAsync()
         {
             return await _context.Cars
                 .Where(c => c.IsSold == "N")
-                .OrderByDescending(c => c.CarId) // Or use a CreatedDate property
+                .OrderByDescending(c => c.CarId)
                 .Take(5)
+                .Select(c => new CarResponse(
+                    c.CarId,
+                    c.Manufacturer,
+                    c.ModelName,
+                    c.CarYear,
+                    c.Color,
+                    c.CarCondition,
+                    c.Price,
+                    c.Mileage
+                ))
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Car>> GetAdBannerAsync()
+        public async Task<IEnumerable<CarResponse>> GetAdBannerAsync()
         {
             return await _context.Cars
                 .Where(c => c.IsSold == "N")
-                .OrderByDescending(c => c.CarId) // Or use a CreatedDate property
+                .OrderByDescending(c => c.CarId)
                 .Take(5)
+                .Select(c => new CarResponse(
+                    c.CarId,
+                    c.Manufacturer,
+                    c.ModelName,
+                    c.CarYear,
+                    c.Color,
+                    c.CarCondition,
+                    c.Price,
+                    c.Mileage
+                ))
                 .ToListAsync();
         }
     }
