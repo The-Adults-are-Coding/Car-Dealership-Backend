@@ -1,11 +1,11 @@
-﻿using CarDealerShipBackend.Domain.Entities;
+﻿using CarDealerShipBackend.Application.DTOs;
 
 namespace CarDealerShipBackend.Application.Interfaces
 {
     public interface ICarService
     {
-        Task<IEnumerable<Car>> GetAllCarsAsync();
-        Task<IEnumerable<Car>> GetFiveLatestCarsAsync();
-        Task<IEnumerable<Car>> GetAdBannerAsync();
+        Task<IEnumerable<CarResponse>> GetAllCarsAsync();
+        Task<IEnumerable<CarResponse>> GetFiveLatestCarsAsync();
+        Task<IEnumerable<CarResponse>> GetAdBannerAsync();
     }
 }
