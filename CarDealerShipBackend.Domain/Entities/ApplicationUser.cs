@@ -13,6 +13,8 @@ namespace CarDealerShipBackend.Domain.Entities
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
+        public string National_ID {  get; set; }= string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string occupation { get; set; } = string.Empty;
     }
-
 }
