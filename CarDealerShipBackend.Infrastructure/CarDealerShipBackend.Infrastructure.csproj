@@ -12,6 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+    <!-- Firebase Admin SDK for sending notifications -->
+    <PackageReference Include="FirebaseAdmin" Version="2.4.0" />
   </ItemGroup>
 
   <PropertyGroup>
