@@ -8,16 +8,18 @@ namespace CarDealerShipBackend.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize] // This ensures the whole controller requires a login token
+    [Authorize] 
     public class CustomerController : ControllerBase
     {
         private readonly ICarService _carService;
         private readonly ISalesService _salesService;
+        private readonly IUserService _userService;
 
-        public CustomerController(ICarService carService, ISalesService salesService)
+        public CustomerController(ICarService carService, ISalesService salesService, IUserService userService)
         {
             _carService = carService;
             _salesService = salesService;
+            _userService = userService;
         }
 
         [HttpGet("my-cars")]
@@ -67,6 +69,18 @@ namespace CarDealerShipBackend.Api.Controllers
 
             var installments = await _salesService.GetUserInstallmentsAsync(userId);
             return Ok(installments);
+        }
+        [HttpPost("update-token")]
+        public async Task<IActionResult> UpdateDeviceToken([FromBody] UpdateTokenRequest request)
+        {
+            var userId = User.FindFirstValue("uid");
+            if (string.IsNullOrEmpty(userId)) return Unauthorized();
+
+            var success = await _userService.UpdateUserDeviceTokenAsync(userId, request.DeviceToken);
+
+            if (!success) return BadRequest("Failed to update token.");
+
+            return Ok(new { message = "Token updated successfully." });
         }
     }
 }

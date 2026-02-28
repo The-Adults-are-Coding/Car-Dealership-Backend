@@ -10,5 +10,6 @@ namespace CarDealerShipBackend.Application.Interfaces
     public interface IInstallmentPaymentService
     {
         IEnumerable<InstallmentPayment> GetUserInstallmentPayments(int contractId);
+        Task<List<InstallmentPayment>> GetPaymentsDueTodayAsync();
     }
 }

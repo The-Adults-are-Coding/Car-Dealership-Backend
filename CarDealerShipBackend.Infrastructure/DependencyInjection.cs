@@ -1,3 +1,8 @@
+using CarDealerShipBackend.Application.Interfaces;
+using CarDealerShipBackend.Domain.Entities;
+using CarDealerShipBackend.Infrastructure.BackgroundServices;
+using CarDealerShipBackend.Infrastructure.Data;
+using CarDealerShipBackend.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,10 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using CarDealerShipBackend.Application.Interfaces;
-using CarDealerShipBackend.Domain.Entities;
-using CarDealerShipBackend.Infrastructure.Data;
-using CarDealerShipBackend.Infrastructure.Services;
 
 namespace CarDealerShipBackend.Infrastructure
 {
@@ -16,14 +17,12 @@ namespace CarDealerShipBackend.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            // 1. Database Configuration (MySQL)
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
             );
 
-            // 2. Identity Configuration
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -50,11 +49,12 @@ namespace CarDealerShipBackend.Infrastructure
                 };
             });
 
-            // 4. Dependency Injection for Services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ISalesContractServices, SalesContractService>();
             services.AddScoped<ICarService, CarService>();
             services.AddScoped<ISalesService, SalesService>();
+            services.AddScoped<INotificationService, FirebaseNotificationService>();
+            services.AddHostedService<PaymentNotificationScheduler>();
             return services;
         }
     }
