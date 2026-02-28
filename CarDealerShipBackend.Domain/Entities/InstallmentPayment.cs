@@ -49,6 +49,7 @@ namespace CarDealerShipBackend.Domain.Entities
         // [Column("PAYMENT_METHOD")]
         public string PaymentMethod { get; set; }
 
+        public virtual SalesContract SalesContract { get; set; } 
         // The following two fields are partially obscured but inferred from data types:
 
     }

@@ -32,7 +32,7 @@ namespace CarDealerShipBackend.Api.Controllers
             if (pageSize < 1) pageSize = 10;
             if (pageSize > 50) pageSize = 50;
 
-            var result = await _carService.GetAllCarsAsync(pageNumber, pageSize);
+            var result = await _carServices.GetAllCarsAsync(pageNumber, pageSize);
             return Ok(result);
         }
         [HttpGet("getAllSalesContracts")]
