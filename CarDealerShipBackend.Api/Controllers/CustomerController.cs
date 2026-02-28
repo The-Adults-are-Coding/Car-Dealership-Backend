@@ -8,7 +8,7 @@ namespace CarDealerShipBackend.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize] 
+    [Authorize] // This ensures the whole controller requires a login token
     public class CustomerController : ControllerBase
     {
         private readonly ICarService _carService;
