@@ -15,10 +15,16 @@ namespace CarDealerShipBackend.Infrastructure.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<CarResponse>> GetAllCarsAsync()
+        public async Task<PaginatedResult<CarResponse>> GetAllCarsAsync(int pageNumber, int pageSize)
         {
-            return await _context.Cars
-                .Where(c => c.IsSold == "N")
+            var query = _context.Cars.Where(c => c.IsSold == "N");
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .OrderByDescending(c => c.CarId) 
+                .Skip((pageNumber - 1) * pageSize) 
+                .Take(pageSize) 
                 .Select(c => new CarResponse(
                     c.CarId,
                     c.Manufacturer,
@@ -30,6 +36,15 @@ namespace CarDealerShipBackend.Infrastructure.Services
                     c.Mileage
                 ))
                 .ToListAsync();
+
+            return new PaginatedResult<CarResponse>
+            {
+
+                Items = items,
+                TotalCount = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
         }
 
         public async Task<IEnumerable<CarResponse>> GetFiveLatestCarsAsync()
