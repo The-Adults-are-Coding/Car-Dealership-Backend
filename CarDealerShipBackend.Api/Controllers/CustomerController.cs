@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using CarDealerShipBackend.Application.Interfaces;
 using CarDealerShipBackend.Application.DTOs;
+using MySqlConnector;
 
 namespace CarDealerShipBackend.Api.Controllers
 {
@@ -81,6 +82,10 @@ namespace CarDealerShipBackend.Api.Controllers
             if (!success) return BadRequest("Failed to update token.");
 
             return Ok(new { message = "Token updated successfully." });
+        }
+        [HttpGet("Balance/{id}")]
+        public async Task<IActionResult> getBalance(string id) {
+            return Ok(await _userService.getBalanceAsync(id));
         }
     }
 }
