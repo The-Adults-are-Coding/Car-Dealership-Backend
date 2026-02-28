@@ -17,5 +17,6 @@ namespace CarDealerShipBackend.Domain.Entities
         public string Address { get; set; } = string.Empty;
         public string occupation { get; set; } = string.Empty;
         public string? DeviceToken { get; set; }
+        public double balance { get; set; }
     }
 }

@@ -4,6 +4,8 @@ namespace CarDealerShipBackend.Application.DTOs
 {
   public record AuthResponse(
       string Id,
+      string FirstName,
+      string LastName,
       string Email,
       string Token
   // List<string> Roles,

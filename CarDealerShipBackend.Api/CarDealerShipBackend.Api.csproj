@@ -20,4 +20,10 @@
     <ProjectReference Include="..\CarDealerShipBackend.Infrastructure\CarDealerShipBackend.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="firebase-credentials.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
