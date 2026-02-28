@@ -37,11 +37,20 @@ namespace CarDealerShipBackend.Api.Controllers
         }
         [HttpGet("getAllSalesContracts")]
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> getAllSalesContracts()
+
+        public async Task<IActionResult> GetAllSalesContracts([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            return Ok(await _salesContractServices.GetAllSalesContracts());
+            // Validate inputs to prevent negative numbers or excessively large queries
+            if (pageNumber < 1) pageNumber = 1;
+            if (pageSize < 1) pageSize = 10;
+            if (pageSize > 50) pageSize = 50; // Max 50 records per request to protect server memory
+
+            var result = await _salesContractServices.GetAllSalesContracts(pageNumber, pageSize);
+
+            return Ok(result);
         }
-        [HttpGet("getUserContracts/{id}")]
+
+            [HttpGet("getUserContracts/{id}")]
         [Authorize(Roles = Roles.Admin)]
         public async Task<IActionResult> getUserSalesContracts(int id)
         {
