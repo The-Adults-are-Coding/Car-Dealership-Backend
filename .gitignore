@@ -35,7 +35,7 @@ cmake-build-*/
 appsettings.Development.json
 appsettings.Local.json
 appsettings.*.local.json
-
+CarDealerShipBackend.Api/firebase-credentials.json
 # Environment variable files
 .env
 .env.local
